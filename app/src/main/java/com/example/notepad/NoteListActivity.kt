@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -76,6 +77,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
     fun saveNote(note: Note, noteIndex: Int){
         notes[noteIndex] = note
         adapter.notifyDataSetChanged()
+        Toast.makeText(this, "Note modifiée", Toast.LENGTH_LONG).show()
 
     }
 

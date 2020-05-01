@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import kotlinx.android.synthetic.main.activity_note_detail.*
 
@@ -74,7 +75,7 @@ class NoteDetailActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.action_save -> {
-                Log.i("Info  debug: ", "Save btn clicked")
+                //Log.i("Info  debug: ", "Save btn clicked")
                 saveNote()
                 return true
             }
