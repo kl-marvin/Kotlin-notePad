@@ -10,10 +10,11 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import org.w3c.dom.Text
 
+
 class NoteAdapter(val notes: List<Note>, val itemClickListener: View.OnClickListener):
     RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
-        // récupération des données du Layout
+        // récupération des références lié aux éléments graphiques du Layout
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
             val cardView = itemView.findViewById(R.id.card_view) as CardView
             val titleView = itemView.findViewById(R.id.title) as TextView
@@ -21,8 +22,7 @@ class NoteAdapter(val notes: List<Note>, val itemClickListener: View.OnClickList
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        // on transforme le Layout en object Kotlin avec l'infater
+        // on transforme le Layout XML en  Kotlin avec l'inflater
         val viewItem = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_note, parent, false )
         return ViewHolder(viewItem)
@@ -38,7 +38,6 @@ class NoteAdapter(val notes: List<Note>, val itemClickListener: View.OnClickList
         holder.titleView.text = note.title
         holder.excerptView.text = note.text
     }
-
 
     override fun getItemCount(): Int {
        return notes.size
