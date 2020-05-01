@@ -28,6 +28,8 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         val toolbar = toolbar as Toolbar
         setSupportActionBar(toolbar)
 
+        create_note_fab.setOnClickListener(this)
+
         notes = mutableListOf<Note>()
 
         // jeu de tests
@@ -70,19 +72,39 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         if (view.tag != null) {
             Log.i("NoteListActivity", "Click !")
             showNoteDetail(view.tag as Int)
+        }else{
+            when(view.id){
+                R.id.create_note_fab -> createNewNote()
+            }
         }
+    }
+
+    private fun createNewNote() {
+       showNoteDetail(-1)
+
     }
 
 
     fun saveNote(note: Note, noteIndex: Int){
-        notes[noteIndex] = note
-        adapter.notifyDataSetChanged()
-        Toast.makeText(this, "Note modifiée", Toast.LENGTH_LONG).show()
+        if( noteIndex < 0){
+            // on ajoute la nouvelle note à l'index 0 du tableau
+            notes.add(0, note)
+            adapter.notifyDataSetChanged()
+            Toast.makeText(this, "Note ajoutée", Toast.LENGTH_LONG).show()
+
+        }else{
+            notes[noteIndex] = note
+            adapter.notifyDataSetChanged()
+            Toast.makeText(this, "Note modifiée", Toast.LENGTH_LONG).show()
+
+        }
+
 
     }
 
     fun showNoteDetail(noteIndex : Int){
-        val note = notes[noteIndex]
+        // si l'index n'est pas dans les bornes du tableau on crée un nouvelle note
+        val note = if (noteIndex < 0) Note() else notes[noteIndex]
 
         val intent = Intent(this, NoteDetailActivity::class.java)
         intent.putExtra(NoteDetailActivity.EXTRA_NOTE, note)
