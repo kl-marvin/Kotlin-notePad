@@ -1,5 +1,6 @@
 package com.example.notepad
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -46,11 +47,36 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // si il n'y a pas de traitement à faire ...
+        if(resultCode != Activity.RESULT_OK || data == null){
+            return
+        }
+        when (requestCode){
+            NoteDetailActivity.REQUEST_EDIT_NOTE -> processEditNoteResult(data)
+        }
+
+    }
+
+    private fun processEditNoteResult(data: Intent) {
+            val noteIndex = data.getIntExtra(NoteDetailActivity.EXTRA_NOTE_INDEX, -1)
+            val note = data.getParcelableExtra<Note>(NoteDetailActivity.EXTRA_NOTE)
+            saveNote(note, noteIndex)
+    }
+
+
     override fun onClick(view: View) {
         if (view.tag != null) {
             Log.i("NoteListActivity", "Click !")
             showNoteDetail(view.tag as Int)
         }
+    }
+
+
+    fun saveNote(note: Note, noteIndex: Int){
+        notes[noteIndex] = note
+        adapter.notifyDataSetChanged()
+
     }
 
     fun showNoteDetail(noteIndex : Int){
@@ -60,7 +86,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         intent.putExtra(NoteDetailActivity.EXTRA_NOTE, note)
         intent.putExtra(NoteDetailActivity.EXTRA_NOTE_INDEX, noteIndex)
 
-        startActivity(intent)
+        startActivityForResult(intent, NoteDetailActivity.REQUEST_EDIT_NOTE)
 
     }
 }

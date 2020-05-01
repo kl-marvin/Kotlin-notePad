@@ -22,6 +22,7 @@ data class Note(var title: String? = "", var text: String? = "", var fileName: S
     }
 
     companion object CREATOR : Parcelable.Creator<Note> {
+
         override fun createFromParcel(parcel: Parcel): Note {
             return Note(parcel)
         }
