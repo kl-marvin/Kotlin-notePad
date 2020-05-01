@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="70dp">
 
+    <!-- Ici on crée les éléments à injecter dans le Recycler view-->
  <androidx.cardview.widget.CardView
      android:id="@+id/card_view"
      android:layout_width="match_parent"
@@ -17,18 +18,13 @@
      <RelativeLayout
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         android:padding="14dp"
-
-         >
-
+         android:padding="14dp">
 
          <TextView
              android:id="@+id/title"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:textSize="19dp"
-             android:textStyle="bold"
-             android:textColor="@android:color/black"
+             style="@style/NoteTitleStyle"
              tools:text="Faire un commit"/>
 
          <TextView
@@ -42,21 +38,13 @@
              tools:text="Lorem ipsum dolor sit amet, consecteutur adeielit Lorem ipsum dolor sit amet, consecteutur adeielit"
              />
 
-
-
      </RelativeLayout>
 
      <View
          android:layout_width="match_parent"
          android:layout_height="0.4dp"
          android:background="@android:color/darker_gray"
-         android:layout_marginLeft="14dp"
-         />
-
-
-
-
-
+         android:layout_marginLeft="14dp"/>
 
      </androidx.cardview.widget.CardView>
 

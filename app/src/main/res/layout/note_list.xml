@@ -6,10 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".NoteListActivity">
 
+ <androidx.appcompat.widget.Toolbar
+     android:id="@+id/toolbar"
+     android:layout_width="match_parent"
+     android:layout_height="?attr/actionBarSize"
+     android:background="?attr/colorPrimary"
+     app:titleTextColor="@color/White"
+     />
+
  <androidx.recyclerview.widget.RecyclerView
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:id="@+id/notes_recycler_view"
+     android:layout_below="@+id/toolbar"
      tools:listitem="@layout/item_note"
      />
 
