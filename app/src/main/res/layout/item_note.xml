@@ -11,18 +11,22 @@
      android:layout_height="wrap_content"
      android:focusable="true"
      android:clickable="true"
+
      android:foreground="?android:attr/selectableItemBackground">
 
      <RelativeLayout
          android:layout_width="match_parent"
          android:layout_height="match_parent"
-         android:padding="10dp">
+         android:padding="14dp"
+
+         >
+
 
          <TextView
              android:id="@+id/title"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:textSize="21sp"
+             android:textSize="19dp"
              android:textStyle="bold"
              android:textColor="@android:color/black"
              tools:text="Faire un commit"/>
@@ -32,7 +36,6 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_below="@+id/title"
-             android:maxLines="1"
              android:ellipsize="end"
              android:textSize="14sp"
              android:textColor="@android:color/darker_gray"
@@ -42,6 +45,13 @@
 
 
      </RelativeLayout>
+
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="0.4dp"
+         android:background="@android:color/darker_gray"
+         android:layout_marginLeft="14dp"
+         />
 
 
 
