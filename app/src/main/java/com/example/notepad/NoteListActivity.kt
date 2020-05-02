@@ -63,8 +63,16 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun processEditNoteResult(data: Intent) {
             val noteIndex = data.getIntExtra(NoteDetailActivity.EXTRA_NOTE_INDEX, -1)
-            val note = data.getParcelableExtra<Note>(NoteDetailActivity.EXTRA_NOTE)
-            saveNote(note, noteIndex)
+
+        when (data.action) {
+            NoteDetailActivity.ACTION_SAVE_NOTE -> {
+                val note = data.getParcelableExtra<Note>(NoteDetailActivity.EXTRA_NOTE)
+                saveNote(note, noteIndex)
+            }
+            NoteDetailActivity.ACTION_DELETE_NOTE -> {
+                deleteNote(noteIndex)
+            }
+        }
     }
 
 
@@ -98,8 +106,15 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
             Toast.makeText(this, "Note modifiée", Toast.LENGTH_LONG).show()
 
         }
+    }
 
-
+    fun deleteNote(noteIndex: Int){
+        if(noteIndex < 0){
+            return
+        }
+        val note = notes.removeAt(noteIndex)
+        adapter.notifyDataSetChanged()
+        Toast.makeText(this, "Note supprimée", Toast.LENGTH_LONG).show()
     }
 
     fun showNoteDetail(noteIndex : Int){

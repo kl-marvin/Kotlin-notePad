@@ -28,7 +28,7 @@
      android:layout_height="wrap_content"
      android:layout_alignParentBottom="true"
      android:backgroundTint="@color/colorPrimary"
-     android:src="@drawable/create"
+     android:src="@drawable/baseline_create_white_18dp"
      android:layout_margin="16dp"
      android:layout_alignParentRight="true"/>
 

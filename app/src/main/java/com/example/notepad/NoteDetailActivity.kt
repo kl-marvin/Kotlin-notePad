@@ -18,6 +18,9 @@ class NoteDetailActivity : AppCompatActivity() {
         val REQUEST_EDIT_NOTE = 1
         val EXTRA_NOTE = "note"
         val EXTRA_NOTE_INDEX = "noteIndex"
+
+        val ACTION_SAVE_NOTE = "action.ACTION_SAVE_NOTE"
+        val ACTION_DELETE_NOTE ="action.ACTION_DELETE_NOTE"
     }
 
     lateinit var note: Note
@@ -52,7 +55,7 @@ class NoteDetailActivity : AppCompatActivity() {
         note.text = textView.text.toString()
 
         // on prépare l'intent à envoyer
-        intent = Intent()
+        intent = Intent(ACTION_SAVE_NOTE)
         intent.putExtra(EXTRA_NOTE, note)
         intent.putExtra(EXTRA_NOTE_INDEX, noteIndex)
 
@@ -61,6 +64,31 @@ class NoteDetailActivity : AppCompatActivity() {
         finish()
 
     }
+
+    private fun deleteNote() {
+        intent = Intent(ACTION_DELETE_NOTE)
+        // on passe l'index de la note à supprimer
+        intent.putExtra(EXTRA_NOTE_INDEX, noteIndex)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+
+    }
+
+    private fun showConfirmDeleteNoteDialog() {
+        val confirmFragment = ConfirmDeleteNoteDialogFragment(note.title)
+        confirmFragment.listener = object: ConfirmDeleteNoteDialogFragment.ConfirmDeleteDialogListener {
+            override fun onDialogNegativClick() {
+
+            }
+
+            override fun onDialogPositivClick() {
+                deleteNote()
+            }
+        }
+        confirmFragment.show(supportFragmentManager, "confirmDeleteDialog")
+    }
+
+
 
 
     /***********************************************************
@@ -79,7 +107,15 @@ class NoteDetailActivity : AppCompatActivity() {
                 saveNote()
                 return true
             }
+            R.id.action_delete -> {
+                showConfirmDeleteNoteDialog()
+                Log.i("Info  debug: ", "Delete btn clicked")
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
+
+
+
 }
