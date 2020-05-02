@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -56,7 +57,7 @@ class NoteDetailActivity : AppCompatActivity() {
 
         // on prépare l'intent à envoyer
         intent = Intent(ACTION_SAVE_NOTE)
-        intent.putExtra(EXTRA_NOTE, note)
+        intent.putExtra(EXTRA_NOTE, note as Parcelable)
         intent.putExtra(EXTRA_NOTE_INDEX, noteIndex)
 
         // si tout va bien on renvoie result ok

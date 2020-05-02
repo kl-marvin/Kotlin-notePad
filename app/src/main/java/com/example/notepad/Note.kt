@@ -2,8 +2,12 @@ package com.example.notepad
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 
-data class Note(var title: String? = "", var text: String? = "", var fileName: String? = ""): Parcelable {
+
+// note implémente l'Interface Parcelable (transfère de Note sur != activity)
+// et Serealizable (java) pour transformer l'object en fichier et inverssement
+data class Note(var title: String? = "", var text: String? = "", var fileName: String? = ""): Parcelable, Serializable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -22,7 +26,8 @@ data class Note(var title: String? = "", var text: String? = "", var fileName: S
     }
 
     companion object CREATOR : Parcelable.Creator<Note> {
-
+        // id unique pour reconnaitre les versions de Note
+        private val serialVersionUIid: Long = 424242424242
         override fun createFromParcel(parcel: Parcel): Note {
             return Note(parcel)
         }
